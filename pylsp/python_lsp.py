@@ -369,7 +369,6 @@ class PythonLSPServer(MethodDispatcher):
     def hover(self, doc_uri, position):
         return self._hook('pylsp_hover', doc_uri, position=position) or {'contents': ''}
 
-    @_utils.debounce(LINT_DEBOUNCE_S, keyed_by='doc_uri')
     def lint(self, doc_uri, is_saved):
         # Since we're debounced, the document may no longer be open
         workspace = self._match_uri_to_workspace(doc_uri)
